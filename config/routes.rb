@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :countries
+  get 'dashboards/index'
+
   devise_for :admins
   get 'pages/index'
 
@@ -7,6 +10,10 @@ Rails.application.routes.draw do
   get 'pages/contact'
 
   get 'pages/team'
+  
+  scope :admins do
+    root :to => 'dashboards#index', :as => :admin_root
+  end
   
   root 'pages#index'
 
